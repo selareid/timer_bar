@@ -12,7 +12,7 @@
         }
 
         #header {
-            margin-left: 20px;
+            margin: 0;
         }
 
         #liveTime {
@@ -20,9 +20,10 @@
         }
 
         #sliderContainer {
-            width: 95%;
-            height: 40px;
-            margin: 0px auto;
+            width: 80%;
+            min-width: 8em;
+            height: 3em;
+            margin: 0;
 
             /* border: 2px solid #2e4fe4; */
             background-color: rgb(184, 184, 184);
@@ -35,14 +36,33 @@
             background: linear-gradient(to right, transparent 80%, rgb(26, 26, 26) 95%);
             /* border: 2px solid brown */
         }
+
+        @media screen and (max-width: 400px) {
+            #header {
+                margin-top: 100px;
+            }
+        }
+
+        @media screen and (min-width: 700px) {
+            #wrapper {
+                margin-top: 30vh;
+                margin-left: 15vw;
+            }
+
+            #sliderContainer {
+                width: 70vw;
+            }
+        }
     </style>
 </head>
 <body>
-    <div id="header">
-        <h1 id="liveTime"></h1>
-    </div>
-    <div id="sliderContainer">
-        <div id="sliderBar"></div>
+    <div id="wrapper">
+        <div id="header">
+            <h1 id="liveTime"></h1>
+        </div>
+        <div id="sliderContainer">
+            <div id="sliderBar"></div>
+        </div>
     </div>
 
     <script>
