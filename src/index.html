@@ -47,6 +47,7 @@
             max-width: 700px;
             margin: 10px auto;
             border: 2px dashed black;
+            visibility: hidden;
         }
     </style>
 </head>
@@ -55,7 +56,7 @@
         <!-- <h1>Standard Day Time</h1> -->
         <!-- <h1>SDT</h1> -->
         <h1 id="liveTime"></h1>
-        <a href="https://todoist.com/" style="float: right; margin-top: 15px; color: grey; text-decoration: none;">T</a>
+        <a href="#" style="float: right; margin-top: 15px; margin-right: 5px; color: grey; text-decoration: none;" onClick="todoistFrame.style.visibility=todoistFrame.style.visibility==='hidden'?'visible':'hidden'">T</a>
     </div>
 
     <div id="sliderContainer">
@@ -104,9 +105,9 @@
 
             
             // Add leading zero if needed
-            hours = (hours < 10) ? "0" + hours : hours;
-            minutes = (minutes < 10) ? "0" + minutes : minutes;
-            seconds = (seconds < 10) ? "0" + seconds : seconds;
+            hours = (0 <= hours && hours < 10) ? "0" + hours : hours;
+            minutes = (0 <= minutes && minutes < 10) ? "0" + minutes : minutes;
+            seconds = (0 <= seconds && seconds < 10) ? "0" + seconds : seconds;
             milliseconds = ("00" + milliseconds).slice(-3);
 
             // Display the time
@@ -121,15 +122,17 @@
 
 
         let start_time = new Date()
-        start_time.setHours(8,0)
+        start_time.setHours(5,0)
         let end_time = new Date()
-        end_time.setHours(20,30)
+        end_time.setHours(21,15)
         updateTime(start_time, end_time)
         setInterval(() => updateTime(start_time, end_time), UPDATE_DELAY);
         
 
-        let current_time = new Date();
-        updateSliderBar((current_time - start_time)/(end_time - start_time))
+        updateSliderBar((new Date() - start_time)/(end_time - start_time))
+        setInterval(() => {
+            updateSliderBar((new Date() - start_time)/(end_time - start_time))
+        }, UPDATE_DELAY);
     </script>
 </body>
 </html>
