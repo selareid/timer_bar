@@ -38,33 +38,16 @@
             background: linear-gradient(to right, transparent 80%, rgb(26, 26, 26) 95%);
             /* border: 2px solid brown */
         }
-
-        #todoistFrame {
-            display: block;
-            height: 80vh;
-            width: 75%;
-            min-width: 350px;
-            max-width: 700px;
-            margin: 10px auto;
-            border: 2px dashed black;
-            visibility: hidden;
-        }
     </style>
 </head>
 <body>
     <div id="header">
-        <!-- <h1>Standard Day Time</h1> -->
-        <!-- <h1>SDT</h1> -->
         <h1 id="liveTime"></h1>
-        <a href="#" style="float: right; margin-top: 15px; margin-right: 5px; color: grey; text-decoration: none;" onClick="todoistFrame.style.visibility=todoistFrame.style.visibility==='hidden'?'visible':'hidden'">T</a>
     </div>
 
     <div id="sliderContainer">
         <div id="sliderBar"></div>
     </div>
-
-    <iframe id="todoistFrame" src="https://app.todoist.com/app/"></iframe>
-
 
     <script>
         const UPDATE_DELAY = 500
