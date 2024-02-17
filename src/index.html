@@ -128,9 +128,10 @@
 
 
         let start_time = new Date()
-        start_time.setHours(5,0)
+        start_time.setHours(5,0,0,0)
         let end_time = new Date()
-        end_time.setHours(21,15)
+        end_time.setHours(21,15,0,0)
+        
         updateTime(start_time, end_time)
         setInterval(() => updateTime(start_time, end_time), UPDATE_DELAY);
         
