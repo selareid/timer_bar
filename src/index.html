@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+
+    <style>
+        body {
+            background-color: rgb(20, 20, 20);
+            color: white;
+        }
+
+        #header {
+            margin-left: 20px;
+        }
+
+        #header * {
+            display: inline;
+        }
+
+        #liveTime {
+            margin: 0;
+        }
+
+        #sliderContainer {
+            width: 95%;
+            height: 40px;
+            margin: 0px auto;
+            /* border: 2px solid #2e4fe4; */
+            background-color: rgb(184, 184, 184);
+        }
+        
+        #sliderBar {
+            position: relative;
+            height: 100%;
+            transition: width 0.3s ease;
+            background: linear-gradient(to right, transparent 80%, rgb(26, 26, 26) 95%);
+            /* border: 2px solid brown */
+        }
+
+        #todoistFrame {
+            display: block;
+            height: 80vh;
+            width: 75%;
+            min-width: 350px;
+            max-width: 700px;
+            margin: 10px auto;
+            border: 2px dashed black;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <!-- <h1>Standard Day Time</h1> -->
+        <!-- <h1>SDT</h1> -->
+        <h1 id="liveTime"></h1>
+        <a href="https://todoist.com/" style="float: right; margin-top: 15px; color: grey; text-decoration: none;">T</a>
+    </div>
+
+    <div id="sliderContainer">
+        <div id="sliderBar"></div>
+    </div>
+
+    <iframe id="todoistFrame" src="https://app.todoist.com/app/"></iframe>
+
+
+    <script>
+        const UPDATE_DELAY = 9
+
+        const slider_bar = document.getElementById("sliderBar");
+
+        function updateTime(day_start, day_end) {
+            let now = new Date();
+
+            let hours;
+            let minutes;
+            let seconds;
+            let milliseconds;
+            
+            if (day_end !== undefined) {
+                let elapsed_time = day_end - now;
+
+                hours = Math.floor(elapsed_time / (1000 * 60 * 60));
+                minutes = Math.floor((elapsed_time % (1000 * 60 * 60)) / (1000 * 60));
+                seconds = Math.floor((elapsed_time % (1000 * 60)) / 1000);
+                milliseconds = elapsed_time % 1000;
+            }
+            else if (day_start !== undefined) {
+                let elapsed_time = now-start_time;
+
+                hours = Math.floor(elapsed_time / (1000 * 60 * 60));
+                minutes = Math.floor((elapsed_time % (1000 * 60 * 60)) / (1000 * 60));
+                seconds = Math.floor((elapsed_time % (1000 * 60)) / 1000);
+                milliseconds = elapsed_time % 1000;
+
+            }
+            else {
+                hours = now.getHours();
+                minutes = now.getMinutes();
+                seconds = now.getSeconds();
+                milliseconds = now.getMilliseconds();
+            }
+
+            
+            // Add leading zero if needed
+            hours = (hours < 10) ? "0" + hours : hours;
+            minutes = (minutes < 10) ? "0" + minutes : minutes;
+            seconds = (seconds < 10) ? "0" + seconds : seconds;
+            milliseconds = ("00" + milliseconds).slice(-3);
+
+            // Display the time
+            let timeString = hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+            document.getElementById("liveTime").innerText = timeString;
+        }
+
+
+        function updateSliderBar(value) {
+            slider_bar.style.width = value*100 + "%";
+        }
+
+
+        let start_time = new Date()
+        start_time.setHours(8,0)
+        let end_time = new Date()
+        end_time.setHours(20,30)
+        updateTime(start_time, end_time)
+        setInterval(() => updateTime(start_time, end_time), UPDATE_DELAY);
+        
+
+        let current_time = new Date();
+        updateSliderBar((current_time - start_time)/(end_time - start_time))
+    </script>
+</body>
+</html>
